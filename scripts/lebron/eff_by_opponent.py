@@ -4,6 +4,16 @@ from nba_api.stats.static import players
 import pandas as pd
 import os
 
+def calculate_efficiency(row):
+    ts = (row['PTS'] / (2 * (row['FGA'] + 0.44 * row['FTA']))) * 100
+    per = (row['PTS'] + row['REB'] + row['AST'] + row['STL'] + row['BLK']
+           - row['FGA'] - row['FTA'] - row['TOV'])
+    
+    return pd.Series({
+        'TS%': ts,
+        'PER': per
+    })
+
 lebron = players.find_players_by_full_name("LeBron James")[0]
 lebron_id = lebron['id']
 
@@ -16,16 +26,6 @@ for season in seasons:
     gamelogs_df = season_gamelogs.get_data_frames()[0]
     gamelogs_df['SEASON'] = season
     gamelogs = pd.concat([gamelogs, gamelogs_df], ignore_index=True)
-
-def calculate_efficiency(row):
-    ts = (row['PTS'] / (2 * (row['FGA'] + 0.44 * row['FTA']))) * 100
-    per = (row['PTS'] + row['REB'] + row['AST'] + row['STL'] + row['BLK']
-           - row['FGA'] - row['FTA'] - row['TOV'])
-    
-    return pd.Series({
-        'TS%': ts,
-        'PER': per
-    })
 
 efficiency_df = gamelogs.apply(calculate_efficiency, axis=1)
 efficiency_df = pd.concat([gamelogs[['MATCHUP', 'PTS', 'REB', 'AST', 'STL', 'BLK', 'FGA', 'FTA', 'TOV', 'SEASON']], efficiency_df], axis=1)
