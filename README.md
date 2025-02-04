@@ -1,0 +1,2 @@
+### Hello! ###
+This is a semester long project for STAT 531 at the University of South Carolina to study Machine Learning Implementation with Python. This repository contains several python scripts, visualizations, etc relating to the data of the National Basketball Association (NBA).
