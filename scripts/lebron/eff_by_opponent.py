@@ -1,4 +1,4 @@
-## THIS SCRIPT FETCHES LEBRON'S EFFICIENCY OVER THE LAST FIVE SEASONS BY OPPONENT ##
+## THIS SCRIPT FETCHES LEBRON'S EFFICIENCY OVER THE LAST TEN SEASONS BY OPPONENT ##
 from nba_api.stats.endpoints import playergamelog
 from nba_api.stats.static import players
 import pandas as pd
