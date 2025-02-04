@@ -5,7 +5,7 @@ import pandas as pd
 import os
 
 def calculate_efficiency(row):
-    ts = (row['PTS'] / (2 * (row['FGA'] + 0.44 * row['FTA']))) * 100
+    ts = (row['PTS'] / (2 * (row['FGA'] + 0.475 * row['FTA']))) * 100
     per = (row['PTS'] + row['REB'] + row['AST'] + row['STL'] + row['BLK']
            - row['FGA'] - row['FTA'] - row['TOV'])
     
